@@ -6,12 +6,12 @@ By managing design tokens using GraphQL we can describe what's possible in a des
 
 <h2>How it works</h2>
 
-At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field is a <code>Token</code> type which contains two subfields, <code>value</code> and <code>unit</code>.
+At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field is of type <code>Token</code>. A <code>Token</code> contains two subfields, <code>value</code> and <code>unit</code>.
 
 ```graphql
-token {
-  value: String!
+type Token {
   unit: String
+  value: String!
 }
 ```
 
@@ -50,6 +50,7 @@ will return
 ```
 
 <h3>Arguments</h3>
+
 We can transform the data returned to us by passing [_arguments_](https://graphql.org/learn/queries/#arguments) to a field. Passing an Enumeration type, <code>unit</code>, ensures we implement a finite set of transformations.
 
 ```graphql
