@@ -8,12 +8,12 @@ By managing design tokens using GraphQL we can describe what's possible in a des
 
 At its simplest, GraphQL is about asking for specific fields on objects. In our case, every field is a <code>Token</code> type which contains two subfields, <code>value</code> and <code>unit</code>.
 
-<code>
-token { 
-value: String! 
-unit: String
+```graphql
+token {
+  value: String!
+  unit: String
 }
-</code>
+```
 
 <code>value</code> denotes a raw value as a string like, <code>"100"</code>, <code>"16"</code> and <code>"FFFFFF"</code>. <code>unit</code> gives that value meaning providing it with context to be intepreted, e.g. <code>"percent"</code>, <code>"px"</code> and <code>"hex"</code> (<code>unit</code> is optional, as not all tokens have a unit, like "auto").
 
