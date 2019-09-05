@@ -79,6 +79,44 @@ will return
 }
 ```
 
+<h3>Fields</h3>
+
+Design Tokens GraphQL implements the [Theme UI](https://theme-ui.com/theme-spec/) specification when defining the possible entry points into the GraphQL API on the Query type.
+
+This means, our Query type provides fields such as
+
+- `colors`
+- `fonts`
+- `fontSizes`
+- `sizes`
+- `spacing`
+
+See the full list of fields [here]().
+
+If there is no field that represents a token that you would like to include for a later transform, you can use the "identity" `token` field, e.g.,
+
+```graphql
+{
+  someField: token(unit: "someUnit", value: "someValue") {
+    unit
+    value
+  }
+}
+```
+
+Will return the arguments supplied to it
+
+```json
+{
+  "data": {
+    "someField": {
+      "value": "someValue",
+      "unit": "someUnit"
+    }
+  }
+}
+```
+
 <h3>Arguments</h3>
 
 We can transform the data returned to us by passing [_arguments_](https://graphql.org/learn/queries/#arguments) to a field. Passing an Enumeration type, <code>unit</code>, ensures we implement a finite set of transformations.
