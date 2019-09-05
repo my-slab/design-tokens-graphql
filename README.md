@@ -21,13 +21,48 @@ We can query for more than one token, by using [_aliases_](https://graphql.org/l
 
 ```graphql
 {
-  marginTop: token {
+  marginBottom: token {
     value
     unit
   }
-  marginBottom: token {
+  marginTop: token {
     value
     unit
   }
 }
 ```
+
+will return
+
+```json
+{
+  "data": {
+    "marginBottom": {
+      "value": "8",
+      "unit": "px"
+    },
+    "marginTop": {
+      "value": "8",
+      "unit": "px"
+    }
+  }
+}
+```
+
+<h3>Arguments</h3>
+We can transform the data returned to us by passing [_arguments_](https://graphql.org/learn/queries/#arguments) to a field. Passing an Enumeration type, <code>unit</code>, ensures we implement a finite set of transformations.
+
+```graphql
+{
+  backgroundColor: colors(unit: rgba) {
+    value
+    unit
+  }
+  color: colors(unit: hex) {
+    value
+    unit
+  }
+}
+```
+
+In this example, color handles the units <code>rgba</code> and <code>hex</code>.
