@@ -2,7 +2,29 @@
 
 Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query language for your design tokens.
 
-By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Components can be built with what's defined in the design system and provide clear and helpful documentation.
+By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens and provide clear and helpful documentation.
+
+```graphql
+query PrimaryButton {
+  ...Primary
+
+  padding: spacing(space: md) {
+    unit
+    value
+  }
+}
+
+fragment Primary on Query {
+  backgroundColor: colors(color: secondary, unit: hex) {
+    unit
+    value
+  }
+  color: colors(color: primary, unit: hsla) {
+    unit
+    value
+  }
+}
+```
 
 <h2>How it works</h2>
 
