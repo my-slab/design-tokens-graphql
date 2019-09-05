@@ -2,26 +2,34 @@
 
 Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query language for your design tokens.
 
-By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens and provide clear and helpful documentation.
+By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens as well as providing clear and helpful documentation.
 
 ```graphql
 query PrimaryButton {
   ...Primary
 
-  padding: spacing(space: md) {
+  padding: spacing(unit: px, space: md) {
     unit
     value
   }
 }
+```
 
-fragment Primary on Query {
-  backgroundColor: colors(color: secondary, unit: hex) {
-    unit
-    value
-  }
-  color: colors(color: primary, unit: hsla) {
-    unit
-    value
+```json
+{
+  "data": {
+    "backgroundColor": {
+      "value": "000000",
+      "unit": "hex"
+    },
+    "color": {
+      "value": "FFFFFF",
+      "unit": "hex"
+    },
+    "padding": {
+      "value": "16",
+      "unit": "px"
+    }
   }
 }
 ```
@@ -43,11 +51,11 @@ We can query for more than one token, by using [_aliases_](https://graphql.org/l
 
 ```graphql
 {
-  marginBottom: token {
+  marginBottom: spacing {
     value
     unit
   }
-  marginTop: token {
+  marginTop: spacing {
     value
     unit
   }
@@ -88,4 +96,36 @@ We can transform the data returned to us by passing [_arguments_](https://graphq
 }
 ```
 
-In this example, color handles the units <code>rgba</code> and <code>hex</code>.
+In this example, color handles transformations for the units <code>rgba</code> and <code>hex</code>.
+
+<h3>Fragments</h3>
+
+We can compose common queries by breaking them into reusable units called [_fragments_](https://graphql.org/learn/queries/#fragments). An often repeated set of fields, padding top and padding bottom, can be represented as a fragment named PaddingY.
+
+```graphql
+fragment PaddingY on Query {
+  paddingTop: spacing(space: $paddingY) {
+    value
+    unit
+  }
+  paddingBottom: spacing(space: $paddingY) {
+    value
+    unit
+  }
+}
+```
+
+It can now be included with an existing query to provide padding top and padding bottom fields.
+
+```graphql
+query Button($paddingY: md) {
+  ...PaddingY
+
+  fontSize: fontSizes(fontSize: sm) {
+    unit
+    value
+  }
+}
+```
+
+A list of common fragments provided is [here]().
