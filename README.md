@@ -47,7 +47,21 @@ type Token {
 
 <code>value</code> denotes a raw value as a string like, <code>"100"</code>, <code>"16"</code> and <code>"FFFFFF"</code>. <code>unit</code> gives that value meaning providing it with context to be intepreted, e.g. <code>"percent"</code>, <code>"px"</code> and <code>"hex"</code> (<code>unit</code> is optional, as not all tokens have a unit, like <code>"auto"</code>).
 
-We can query for more than one token, by using [_aliases_](https://graphql.org/learn/queries/#aliases), a GraphQL feature that allows us to rename the result of a field to anything, e.g.
+<h3>Fields</h3>
+
+Design Tokens GraphQL implements the [Theme UI](https://theme-ui.com/theme-spec/) specification when defining the possible entry points into the GraphQL API on the Query type.
+
+This means, our Query type provides fields such as
+
+- `colors`
+- `fonts`
+- `fontSizes`
+- `sizes`
+- `spacing`
+
+See the full list of fields [here]().
+
+We can query for more than one token of the same field by using [_aliases_](https://graphql.org/learn/queries/#aliases), a GraphQL feature that allows us to rename the result of a field to anything, e.g.,
 
 ```graphql
 {
@@ -74,44 +88,6 @@ will return
     "marginTop": {
       "value": "8",
       "unit": "px"
-    }
-  }
-}
-```
-
-<h3>Fields</h3>
-
-Design Tokens GraphQL implements the [Theme UI](https://theme-ui.com/theme-spec/) specification when defining the possible entry points into the GraphQL API on the Query type.
-
-This means, our Query type provides fields such as
-
-- `colors`
-- `fonts`
-- `fontSizes`
-- `sizes`
-- `spacing`
-
-See the full list of fields [here]().
-
-If there is no field that represents a token that you would like to include for a later transform, you can use the "identity" `token` field, e.g.,
-
-```graphql
-{
-  someField: token(unit: "someUnit", value: "someValue") {
-    unit
-    value
-  }
-}
-```
-
-Will return the arguments supplied to it
-
-```json
-{
-  "data": {
-    "someField": {
-      "value": "someValue",
-      "unit": "someUnit"
     }
   }
 }
@@ -167,3 +143,5 @@ query Button($paddingY: md) {
 ```
 
 A list of common fragments provided is [here]().
+
+<h3>Transforms</h3>
