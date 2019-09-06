@@ -95,22 +95,24 @@ will return
 
 <h3>Arguments</h3>
 
-We can transform the data returned to us by passing [_arguments_](https://graphql.org/learn/queries/#arguments) to a field. Passing an Enumeration type, <code>unit</code>, ensures we implement a finite set of transformations.
+We can transform the data returned to us by passing [_arguments_](https://graphql.org/learn/queries/#arguments) to a field.
 
 ```graphql
 {
-  backgroundColor: colors(unit: rgba) {
+  backgroundColor: colors(color: orange4) {
     value
     unit
   }
-  color: colors(unit: hex) {
+  color: colors(color: purple9, unit: rgb) {
     value
     unit
   }
 }
 ```
 
-In this example, color handles transformations for the units <code>rgba</code> and <code>hex</code>.
+Passing an Enumeration type, <code>color</code>, ensures we implement a finite set of colors available in our design system.
+
+In this example, color also handles the argument unit. By providing a unit, we're able to transform the value and unit returned to us on a field-by-field basis.
 
 <h3>Fragments</h3>
 
