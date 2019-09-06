@@ -49,7 +49,7 @@ type Token {
 
 <h3>Fields</h3>
 
-Design Tokens GraphQL implements the [Theme UI](https://theme-ui.com/theme-spec/) specification when defining the possible entry points into the GraphQL API on the Query type.
+Design Tokens GraphQL implements the [Theme UI](https://theme-ui.com/theme-spec/) specification when defining the possible entry points into the GraphQL API on the [Query type](https://graphql.org/learn/execution/#root-fields-resolvers).
 
 This means, our Query type provides fields such as
 
