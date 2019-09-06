@@ -1,4 +1,4 @@
-<h1>Design Tokens GraphQL</h1>
+<h1 style="text-align: center;">Design Tokens GraphQL</h1>
 
 Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query language for your design tokens.
 
