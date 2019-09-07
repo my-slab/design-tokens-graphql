@@ -40,12 +40,13 @@ At its simplest, GraphQL is about asking for specific [_fields_](https://graphql
 
 ```graphql
 type Token {
+  name: String!
   unit: String
   value: String!
 }
 ```
 
-<code>value</code> denotes a raw value as a string like, <code>"100"</code>, <code>"16"</code> and <code>"FFFFFF"</code>. <code>unit</code> gives that value meaning providing it with context to be intepreted, e.g. <code>"percent"</code>, <code>"px"</code> and <code>"hex"</code> (<code>unit</code> is optional, as not all tokens have a unit, like <code>"auto"</code>).
+<code>value</code> denotes a raw value as a string like, <code>"100"</code>, <code>"16"</code> or <code>"FFFFFF"</code>. <code>unit</code> gives that value meaning providing it with context to be intepreted, e.g. <code>"percent"</code>, <code>"px"</code> or <code>"hex"</code> (<code>unit</code> is optional, as not all tokens have a unit, like <code>"auto"</code>).
 
 <h3>Fields</h3>
 
