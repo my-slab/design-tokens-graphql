@@ -1,23 +1,27 @@
 const { ApolloServer, gql } = require('apollo-server')
 
-const { Colors, colors } = require('./colors')
+const { ColorFields, ColorResolvers, Colors } = require('./colors')
 
 const typeDefs = gql`
   ${Colors}
 
   type Token {
-    unit: String!
+    "Token's name, often used as an enumeration argument"
+    name: String!
+    "Gives the value context to be interpreted, e.g., 'percent', 'px' or 'hex'."
+    unit: String
+    "Raw value, like '100', '16' or 'FFFFF'."
     value: String!
   }
 
   type Query {
-    colors(color: Color): Token
+    ${ColorFields}
   }
 `
 
 const resolvers = {
   Query: {
-    colors: (o, { color }) => (color ? colors[color] : colors)
+    ...ColorResolvers
   }
 }
 
