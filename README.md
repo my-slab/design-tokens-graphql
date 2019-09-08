@@ -159,7 +159,7 @@ A list of common fragments provided is [here]().
 
 <h3>Transforms</h3>
 
-Fields also accept a `unit` argument. This provides a finite list of token specific transforms allowing us to change the value and unit returned on a field-by-field basis.
+Fields can accept a `unit` argument. This provides a finite list of token specific transforms allowing us to change the value and unit returned on a field-by-field basis.
 
 Let's transform color's default `hex` value, to `hsl`.
 
