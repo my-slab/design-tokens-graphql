@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./src"
+  },
   "dependencies": {
     "apollo-server": "^2.9.0",
     "chroma-js": "^2.0.6",
