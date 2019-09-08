@@ -5,10 +5,20 @@ Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query la
 By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens as well as providing clear and helpful documentation.
 
 ```graphql
-query PrimaryButton {
-  ...Primary
+query primaryButton {
+  backgroundColor: color(color: oldlace, unit: rgba) {
+    name
+    unit
+    value
+  }
 
-  padding: spacing(unit: px, space: md) {
+  color: color(color: black) {
+    name
+    unit
+    value
+  }
+
+  padding: spacing(space: md) {
     unit
     value
   }
@@ -19,12 +29,14 @@ query PrimaryButton {
 {
   "data": {
     "backgroundColor": {
-      "value": "000000",
-      "unit": "hex"
+      "name": "oldlace",
+      "value": "253,245,230,1",
+      "unit": "rgba"
     },
     "color": {
-      "value": "FFFFFF",
-      "unit": "hex"
+      "unit": "hex",
+      "value": "#000000",
+      "name": "black"
     },
     "padding": {
       "value": "16",
@@ -46,7 +58,7 @@ type Token {
 }
 ```
 
-<code>value</code> denotes a raw value as a string like, <code>"100"</code>, <code>"16"</code> or <code>"FFFFFF"</code>. <code>unit</code> gives that value meaning providing it with context to be intepreted, e.g. <code>"percent"</code>, <code>"px"</code> or <code>"hex"</code> (<code>unit</code> is optional, as not all tokens have a unit, like <code>"auto"</code>).
+`value` denotes a raw value as a string like, `"100"`, `"16"` or `"FFFFFF"`. `unit` gives that value meaning providing it with context to be intepreted, e.g. `"percent"`, `"px"` or `"hex"` (`unit` is optional, as not all tokens have a unit, like `"auto"`). `name` is the name of the token, often used as an enumeration argument when performing token lookups.
 
 <h3>Fields</h3>
 
@@ -104,7 +116,7 @@ We can transform the data returned to us by passing [_arguments_](https://graphq
     value
     unit
   }
-  color: colors(color: honeydew, unit: rgb) {
+  color: colors(color: honeydew) {
     value
     unit
   }
@@ -149,7 +161,7 @@ A list of common fragments provided is [here]().
 
 Fields also accept a `unit` argument. This provides a finite list of token specific transforms allowing us to change the value and unit returned on a field-by-field basis.
 
-Let's transform the default `hex` value, to `hsl`.
+Let's transform color's default `hex` value, to `hsl`.
 
 ```graphql
 {
