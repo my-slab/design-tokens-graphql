@@ -1,9 +1,10 @@
 const { ApolloServer, gql } = require('apollo-server')
 
-const { ColorFields, ColorResolvers, Colors } = require('./colors')
+const { ColorFields, ColorResolvers, ColorUnits, Colors } = require('./colors')
 
 const typeDefs = gql`
   ${Colors}
+  ${ColorUnits}
 
   type Token {
     "Token's name, often used as an enumeration argument"
