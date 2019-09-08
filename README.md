@@ -100,11 +100,11 @@ We can transform the data returned to us by passing [_arguments_](https://graphq
 
 ```graphql
 {
-  backgroundColor: colors(color: orange4) {
+  backgroundColor: colors(color: chartreuse) {
     value
     unit
   }
-  color: colors(color: purple9, unit: rgb) {
+  color: colors(color: honeydew, unit: rgb) {
     value
     unit
   }
@@ -112,8 +112,6 @@ We can transform the data returned to us by passing [_arguments_](https://graphq
 ```
 
 Passing an Enumeration type, <code>color</code>, ensures we implement a finite set of colors available in our design system.
-
-In this example, color also handles the argument unit. By providing a unit, we're able to transform the value and unit returned to us on a field-by-field basis.
 
 <h3>Fragments</h3>
 
@@ -148,4 +146,29 @@ query Button($paddingY: md) {
 A list of common fragments provided is [here]().
 
 <h3>Transforms</h3>
-🚧
+
+Fields also accept a `unit` argument. This provides a finite list of token specific transforms allowing us to change the value and unit returned on a field-by-field basis.
+
+Let's transform the default `hex` value, to `hsl`.
+
+```graphql
+{
+  color: color(color: fuchsia, unit: hsl) {
+    name
+    value
+    unit
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "color": {
+      "name": "fuchsia",
+      "value": "300,1,0.5,1",
+      "unit": "hsl"
+    }
+  }
+}
+```
