@@ -15,13 +15,22 @@ const typeDefs = gql`
     value: String!
   }
 
+  type Component {
+    ${ColorFields}
+  }
+
   type Query {
     ${ColorFields}
+    component: Component
   }
 `
 
 const resolvers = {
   Query: {
+    ...ColorResolvers,
+    component: () => ({})
+  },
+  Component: {
     ...ColorResolvers
   }
 }
