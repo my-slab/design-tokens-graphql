@@ -5,42 +5,82 @@ Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query la
 By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens as well as providing clear and helpful documentation.
 
 ```graphql
-query primaryButton {
-  backgroundColor: color(color: oldlace, unit: rgba) {
-    name
-    unit
-    value
+query Buttons {
+  buttonPrimary: component {
+    ...Button
+    backgroundColor: color(color: navy, unit: rgb) {
+      unit
+      value
+      name
+    }
+
+    color: color(color: whitesmoke, unit: rgb) {
+      unit
+      value
+      name
+    }
   }
 
-  color: color(color: black) {
-    name
-    unit
-    value
-  }
+  buttonSecondary: component {
+    ...Button
+    backgroundColor: color(color: whitesmoke) {
+      unit
+      value
+      name
+    }
 
-  padding: spacing(space: md) {
+    color: color(color: navy) {
+      unit
+      value
+      name
+    }
+  }
+}
+
+fragment Button on Component {
+  padding: spacing(space: sm) {
     unit
     value
   }
 }
 ```
 
+Returns
+
 ```json
 {
   "data": {
-    "backgroundColor": {
-      "name": "oldlace",
-      "value": "253,245,230,1",
-      "unit": "rgba"
+    "buttonPrimary": {
+      "padding": {
+        "unit": "px",
+        "value": "8"
+      },
+      "backgroundColor": {
+        "unit": "rgb",
+        "value": "0,0,128",
+        "name": "navy"
+      },
+      "color": {
+        "unit": "rgb",
+        "value": "245,245,245",
+        "name": "whitesmoke"
+      }
     },
-    "color": {
-      "unit": "hex",
-      "value": "#000000",
-      "name": "black"
-    },
-    "padding": {
-      "value": "16",
-      "unit": "px"
+    "buttonSecondary": {
+      "padding": {
+        "unit": "px",
+        "value": "8"
+      },
+      "backgroundColor": {
+        "unit": "hex",
+        "value": "#F5F5F5",
+        "name": "whitesmoke"
+      },
+      "color": {
+        "unit": "hex",
+        "value": "#000080",
+        "name": "navy"
+      }
     }
   }
 }
