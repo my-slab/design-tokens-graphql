@@ -1,10 +1,12 @@
 const { ApolloServer, gql } = require('apollo-server')
 
 const { ColorFields, ColorResolvers, ColorUnits, Colors } = require('./colors')
+const { SpacingFields, SpacingResolvers, Spacing } = require('./spacing')
 
 const typeDefs = gql`
   ${Colors}
   ${ColorUnits}
+  ${Spacing}
 
   type Token {
     "Token's name, often used as an enumeration argument"
@@ -17,21 +19,25 @@ const typeDefs = gql`
 
   type Component {
     ${ColorFields}
+    ${SpacingFields}
   }
 
   type Query {
     ${ColorFields}
+    ${SpacingFields}
     component: Component
   }
 `
 
 const resolvers = {
   Query: {
+    component: () => ({}),
     ...ColorResolvers,
-    component: () => ({})
+    ...SpacingResolvers
   },
   Component: {
-    ...ColorResolvers
+    ...ColorResolvers,
+    ...SpacingResolvers
   }
 }
 
