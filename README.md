@@ -88,10 +88,10 @@ Returns
 
 <h2>How it works</h2>
 
-At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field is of type <code>Token</code>. A <code>Token</code> contains two subfields, <code>value</code> and <code>unit</code>.
+At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field is of type <code>Token</code>. A <code>Token</code> contains three subfields: `name`, <code>value</code> and <code>unit</code>.
 
 ```graphql
-type Token {
+interface Token {
   name: String!
   unit: String
   value: String!
