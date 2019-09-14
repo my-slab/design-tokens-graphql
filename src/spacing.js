@@ -19,8 +19,8 @@ spacing = spacing.reduce((acc, [k, v]) => {
 const Spacing = toEnum('Spacing', spacing)
 
 const SpacingFields = `
-spacing(space: Spacing!): Token
-spacings: [Token]
+spacing(space: Spacing!): SpaceToken
+spacings: [SpaceToken]
 `
 
 const SpacingResolvers = {

@@ -61,8 +61,8 @@ const toColorUnit = (unit, value) => {
 }
 
 const ColorFields = `
-color(color: Color!, unit: ColorUnit): Token
-colors(unit: ColorUnit): [Token]
+color(color: Color!, unit: ColorUnit): ColorToken
+colors(unit: ColorUnit): [ColorToken]
 `
 
 const ColorResolvers = {

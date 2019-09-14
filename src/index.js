@@ -8,12 +8,24 @@ const typeDefs = gql`
   ${ColorUnits}
   ${Spacing}
 
-  type Token {
+  interface Token {
     "Token's name, often used as an enumeration argument"
     name: String!
     "Gives the value context to be interpreted, e.g., 'percent', 'px' or 'hex'."
     unit: String
     "Raw value, like '100', '16' or 'FFFFF'."
+    value: String!
+  }
+
+  type ColorToken implements Token {
+    name: String!
+    unit: String
+    value: String!
+  }
+
+  type SpaceToken implements Token {
+    name: String!
+    unit: String
     value: String!
   }
 
