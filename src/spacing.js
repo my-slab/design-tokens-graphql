@@ -19,16 +19,55 @@ spacing = spacing.reduce((acc, [k, v]) => {
 const Spacing = toEnum('Spacing', spacing)
 
 const SpacingFields = `
-spacing(space: Spacing!): SpaceToken
-spacings: [SpaceToken]
+spacing(space: Spacing!, unit: SpacingUnit): SpaceToken
+spacings(unit: SpacingUnit): [SpaceToken]
 `
 
+const spacingUnits = {
+  percent: 'percent',
+  px: 'px',
+  rem: 'rem'
+}
+
+const SpacingUnits = toEnum('SpacingUnit', spacingUnits)
+
+const toSpacingUnit = (unit, value) => {
+  const toPx = v => ({
+    value: `${String(v)}px`,
+    unit: spacingUnits.px
+  })
+
+  const toPercent = v => ({
+    value: `${String(v)}%`,
+    unit: spacingUnits.percent
+  })
+
+  const toRem = v => ({
+    value: `${v / 16}rem`,
+    unit: spacingUnits.rem
+  })
+
+  switch (unit) {
+    case spacingUnits.px: {
+      return toPx(value)
+    }
+    case spacingUnits.percent: {
+      return toPercent(value)
+    }
+    case spacingUnits.rem: {
+      return toRem(value)
+    }
+    default: {
+      return toPx(value)
+    }
+  }
+}
+
 const SpacingResolvers = {
-  spacing: (o, { space }) => {
-    const unit = null
+  spacing: (o, { space, unit }) => {
     if (unit) {
       let { value } = spacing[space]
-      return { ...spacing[space] }
+      return { ...spacing[space], ...toSpacingUnit(unit, value) }
     } else {
       return spacing[space]
     }
@@ -37,7 +76,7 @@ const SpacingResolvers = {
     const unit = null
     if (unit) {
       return Object.values(spacing).map(({ value, ...rest }) => {
-        return { ...rest, value }
+        return { ...rest, ...toSpacingUnit(unit, value) }
       })
     } else {
       return Object.values(spacing)
@@ -219,6 +258,7 @@ module.exports = {
   Spacing,
   SpacingFields,
   SpacingResolvers,
+  SpacingUnits,
   margin,
   marginBottom,
   marginLeft,

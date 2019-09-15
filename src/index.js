@@ -1,12 +1,18 @@
 const { ApolloServer, gql } = require('apollo-server')
 
 const { ColorFields, ColorResolvers, ColorUnits, Colors } = require('./colors')
-const { SpacingFields, SpacingResolvers, Spacing } = require('./spacing')
+const {
+  Spacing,
+  SpacingFields,
+  SpacingResolvers,
+  SpacingUnits
+} = require('./spacing')
 
 const typeDefs = gql`
   ${Colors}
   ${ColorUnits}
   ${Spacing}
+  ${SpacingUnits}
 
   interface Token {
     "Token's name, often used as an enumeration argument"
