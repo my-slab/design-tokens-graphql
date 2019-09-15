@@ -88,7 +88,7 @@ Returns
 
 <h2>How it works</h2>
 
-At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field is of type <code>Token</code>. A <code>Token</code> contains three subfields: `name`, <code>value</code> and <code>unit</code>.
+At its simplest, GraphQL is about asking for specific [_fields_](https://graphql.org/learn/schema/#object-types-and-fields) on objects. In our case, every field implements a `Token` interface. A `Token` contains three subfields: `name`, `value` and `unit`.
 
 ```graphql
 interface Token {
@@ -98,7 +98,7 @@ interface Token {
 }
 ```
 
-`value` denotes a raw value as a string like, `"100"`, `"16"` or `"FFFFFF"`. `unit` gives that value meaning providing it with context to be intepreted, e.g. `"percent"`, `"px"` or `"hex"` (`unit` is optional, as not all tokens have a unit, like `"auto"`). `name` is the name of the token, often used as an enumeration argument when performing token lookups.
+`value` denotes a raw value as a string like, `"100"`, `"16"` or `"FFFFFF"`. `unit` gives that value meaning providing it with context to be intepreted, e.g. `"percent"`, `"px"` or `"hex"` (`unit` is optional, as not all tokens have a unit, like `"auto"`). `name` is the name of the token, often used as an enumeration argument when performing field lookups.
 
 <h3>Fields</h3>
 
@@ -201,7 +201,7 @@ A list of common fragments provided is [here]().
 
 Fields can accept a `unit` argument. This provides a finite list of token specific transforms allowing us to change the value and unit returned on a field-by-field basis.
 
-Let's transform color's default `hex` value, to `hsl`.
+Let's transform color's default `hex` value to `hsl`.
 
 ```graphql
 {
