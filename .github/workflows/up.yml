@@ -1,0 +1,10 @@
+workflow "Deploy Application" {
+  on = "push"
+  resolves = ["Deploy"]
+}
+
+action "Deploy" {
+  uses = "apex/actions/up@master"
+  args = "deploy production"
+  secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
+}
