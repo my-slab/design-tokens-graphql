@@ -1,7 +1,8 @@
-workflow "Deploy with Serverless" {
-  on = "push"
-  resolves = ["serverless deploy"]
-}
+name: Deploy
+
+on: [push]
+
+resolves: ["serverless deploy"]
 
 action "master branch only" {
   uses = "actions/bin/filter@b2bea07"
