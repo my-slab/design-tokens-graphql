@@ -1,22 +1,25 @@
-workflow "Deploy with Serverless" {
-on = "push"
-resolves = ["serverless deploy"]
-}
+name: Deploy with Serverless
 
-action "master branch only" {
-uses = "actions/bin/filter@b2bea07"
-args = "branch master"
-}
+on: push
 
-action "npm install" {
-uses = "actions/npm@master"
-args = "install"
-needs = ["master branch only"]
-}
+jobs:
+  build:
+    name: Build and deploy
+    runs-on: ubuntu-latest
 
-action "serverless deploy" {
-uses = "serverless/github-action@master"
-secrets = ["AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"]
-needs = ["npm install"]
-args = "deploy"
-}
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+
+      - name: npm install
+        uses: actions/npm@1.0.0
+        with:
+          args: install
+
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
