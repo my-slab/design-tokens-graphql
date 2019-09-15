@@ -8,11 +8,14 @@ const {
   SpacingUnits
 } = require('./spacing')
 
+const { FontSizeFields, FontSizeResolvers, FontSizes } = require('./fontSizes')
+
 const typeDefs = gql`
-  ${Colors}
   ${ColorUnits}
-  ${Spacing}
+  ${Colors}
+  ${FontSizes}
   ${SpacingUnits}
+  ${Spacing}
 
   interface Token {
     "Token's name, often used as an enumeration argument"
@@ -29,6 +32,12 @@ const typeDefs = gql`
     value: String!
   }
 
+  type FontSizeToken implements Token {
+    name: String!
+    unit: String
+    value: String!
+  }
+
   type SpaceToken implements Token {
     name: String!
     unit: String
@@ -37,11 +46,13 @@ const typeDefs = gql`
 
   type Component {
     ${ColorFields}
+    ${FontSizeFields}
     ${SpacingFields}
   }
 
   type Query {
     ${ColorFields}
+    ${FontSizeFields}
     ${SpacingFields}
     component: Component
   }
@@ -51,10 +62,12 @@ const resolvers = {
   Query: {
     component: () => ({}),
     ...ColorResolvers,
+    ...FontSizeResolvers,
     ...SpacingResolvers
   },
   Component: {
     ...ColorResolvers,
+    ...FontSizeResolvers,
     ...SpacingResolvers
   }
 }
