@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "apollo-server": "^2.9.0",
+    "apollo-server-lambda": "^2.9.3",
     "chroma-js": "^2.0.6",
     "graphql": "^14.5.3",
+    "graphql-type-json": "^0.3.0",
     "html-colors": "^0.0.6"
   }
 }
