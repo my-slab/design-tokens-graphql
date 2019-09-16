@@ -82,4 +82,6 @@ const server = new ApolloServer({
 //   console.log(`🚀  Server ready at ${url}`)
 // })
 
-exports.graphqlHandler = server.createHandler()
+module.exports = {
+  graphqlHandler: server.createHandler()
+}
