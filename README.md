@@ -1,5 +1,7 @@
 <h1 style="text-align: center;">Design Tokens GraphQL</h1>
 
+[![Actions Status](https://github.com/my-slab/design-tokens-graphql/workflows/Deploy%20with%20Serverless/badge.svg)](https://github.com/my-slab/design-tokens-graphql/actions)
+
 Design Tokens GraphQL uses [_GraphQL_](https://graphql.org/learn/) as a query language for your design tokens.
 
 By managing design tokens using GraphQL we can describe what's possible in a design system by using types. Component tokens can be constructed from defined primitive tokens as well as providing clear and helpful documentation.
