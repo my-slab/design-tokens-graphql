@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server')
+// const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, gql } = require('apollo-server-lambda')
 
 const { ColorFields, ColorResolvers, ColorUnits, Colors } = require('./colors')
 const {
@@ -77,6 +78,8 @@ const server = new ApolloServer({
   resolvers
 })
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`)
-})
+// server.listen().then(({ url }) => {
+//   console.log(`🚀  Server ready at ${url}`)
+// })
+
+exports.graphqlHandler = server.createHandler()
