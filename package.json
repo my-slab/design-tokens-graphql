@@ -1,17 +1,33 @@
 {
-  "name": "design-tokens-graphql",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "start": "node ./src"
-  },
-  "dependencies": {
-    "apollo-server": "^2.9.0",
-    "apollo-server-lambda": "^2.9.3",
-    "chroma-js": "^2.0.6",
-    "graphql": "^14.5.3",
-    "graphql-type-json": "^0.3.0",
-    "html-colors": "^0.0.6"
-  }
+	"name": "design-tokens-graphql",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "node ./src",
+		"type-check": "tsc --noEmit",
+		"type-check:watch": "npm run type-check -- --watch",
+		"build": "npm run build:types && npm run build:js",
+		"build:types": "tsc --emitDeclarationOnly",
+		"build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+	},
+	"dependencies": {
+		"apollo-server": "^2.9.0",
+		"apollo-server-lambda": "^2.9.3",
+		"chroma-js": "^2.0.6",
+		"graphql": "^14.5.3",
+		"graphql-type-json": "^0.3.0",
+		"html-colors": "^0.0.6"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.17.6",
+		"@babel/core": "^7.17.9",
+		"@babel/preset-env": "^7.16.11",
+		"@babel/preset-typescript": "^7.16.7",
+		"@typescript-eslint/eslint-plugin": "^5.20.0",
+		"@typescript-eslint/parser": "^5.20.0",
+		"eslint": "^8.13.0",
+		"prettier": "^2.6.2",
+		"typescript": "^4.6.3"
+	}
 }
