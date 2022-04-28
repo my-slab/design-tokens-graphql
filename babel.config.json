@@ -1,0 +1,13 @@
+{
+    "presets": [
+      "@babel/typescript",
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "esmodules": true
+          }
+        }
+      ]
+    ]
+  }
